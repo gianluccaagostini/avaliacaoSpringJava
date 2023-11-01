@@ -18,16 +18,19 @@ public class Pessoa {
 	@Column(nullable = false, unique = true)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length = 100)
 	private String name;
 	
-	
+	@Column(length=200)
 	private String endereco;
 	
+	@Column(length=8)
 	private String cep;
 	
+	@Column(length=200)
 	private String cidade;
 	
+	@Column(length=2)
 	private String uf;
 	
 	public Pessoa() {}

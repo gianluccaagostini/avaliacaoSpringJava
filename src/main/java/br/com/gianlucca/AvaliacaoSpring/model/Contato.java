@@ -21,10 +21,10 @@ public class Contato {
 	@Column(nullable = false, unique = true)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length=1)
 	private int tipoContato;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length=200)
 	private String contato;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
