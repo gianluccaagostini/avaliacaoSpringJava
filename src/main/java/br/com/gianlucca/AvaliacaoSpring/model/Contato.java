@@ -25,7 +25,7 @@ public class Contato {
 	private int tipoContato;
 	
 	@Column(nullable = false, length=200)
-	private String contato;
+	private int contato;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name= "pessoa_id", referencedColumnName = "id")
@@ -33,12 +33,21 @@ public class Contato {
 	
 	public Contato() {}
 
-	public Contato(Long id, int tipoContato, String contato, Pessoa pessoa) {
+	public Contato(Long id, int tipoContato, int contato, Pessoa pessoa) {
 		this.id = id;
 		this.tipoContato = tipoContato;
 		this.contato = contato;
 		this.pessoa = pessoa;
 	}
+	
+	public void adicionarContato(int contato) {
+		this.contato += contato;
+	}
+	
+	public void removerContato(int contato) {
+		this.contato -= contato;
+	}
+
 
 	public Long getId() {
 		return id;
@@ -56,11 +65,11 @@ public class Contato {
 		this.tipoContato = tipoContato;
 	}
 
-	public String getContato() {
+	public int getContato() {
 		return contato;
 	}
 
-	public void setContato(String contato) {
+	public void setContato(int contato) {
 		this.contato = contato;
 	}
 

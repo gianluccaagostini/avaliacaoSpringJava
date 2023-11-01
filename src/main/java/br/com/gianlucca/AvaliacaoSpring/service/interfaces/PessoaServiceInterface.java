@@ -1,0 +1,14 @@
+package br.com.gianlucca.AvaliacaoSpring.service.interfaces;
+
+import java.util.List;
+import java.util.Optional;
+
+import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
+
+public interface PessoaServiceInterface {
+	Pessoa save(Pessoa pessoa);
+	Optional<Pessoa> getById(Long id);
+	List<Pessoa> getAll();
+	Pessoa update(Pessoa pessoa);
+	void delete(Long id);
+}
