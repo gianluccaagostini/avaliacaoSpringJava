@@ -27,7 +27,7 @@ public class Contato {
 	@Column(nullable = false, length=200)
 	private String contato;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name= "pessoa_id", referencedColumnName = "id")
 	private Pessoa pessoa;
 	
