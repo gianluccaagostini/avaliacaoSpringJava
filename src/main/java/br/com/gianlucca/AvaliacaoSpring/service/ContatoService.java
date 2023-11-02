@@ -21,7 +21,7 @@ public class ContatoService {
 	public Contato save(Contato contato) {
 		return contatoRepository.save(contato);
 	}
-	 Optional<Contato> getById(Long id) {
+	public Optional<Contato> getById(Long id) {
 		return contatoRepository.findById(id);
 	}
 	
@@ -34,7 +34,7 @@ public class ContatoService {
 		
 		if(attContato.isPresent()) {
 			Contato newContato = attContato.get();
-			newContato.setPessoa(contato.getPessoa());
+			newContato.setContato(contato.getContato());
 			newContato.setContato(contato.getContato());
 			newContato.setTipoContato(contato.getTipoContato());
 			return contatoRepository.save(newContato);
@@ -45,6 +45,10 @@ public class ContatoService {
 	public void delete(Long id) {
 		contatoRepository.deleteById(id);
 	}
+	
+	/*public Contato adicionarContato(Long id, int contato) {
+		return new 
+	}*/
 	
 	
 }
