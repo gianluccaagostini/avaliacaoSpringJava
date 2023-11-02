@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.gianlucca.AvaliacaoSpring.model.Contato;
 import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
 import br.com.gianlucca.AvaliacaoSpring.service.ContatoService;
@@ -24,9 +23,11 @@ import br.com.gianlucca.AvaliacaoSpring.service.PessoaService;
 public class PessoaResource {
 	
 	private PessoaService pessoaService;
+	private ContatoService contatoService;
 	
-	public PessoaResource(PessoaService pessoaService) {
+	public PessoaResource(PessoaService pessoaService, ContatoService contatoService) {
 		this.pessoaService = pessoaService;
+		this.contatoService = contatoService;
 	}
 	
 	@GetMapping//ok
@@ -60,7 +61,7 @@ public class PessoaResource {
 	
 	@PutMapping("/{id}")//verificar
 	public ResponseEntity<Pessoa> update(@RequestBody Pessoa pessoa, @PathVariable Long id) {
-		Pessoa newPessoa = pessoaService.update(pessoa);
+		Pessoa newPessoa = pessoaService.update(id, pessoa);
 		
 		if(newPessoa == null) {
 			return ResponseEntity.notFound().build();
@@ -73,17 +74,18 @@ public class PessoaResource {
 		pessoaService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	/*
+	
 	@PostMapping("/{id}/contatos")
-	public ResponseEntity<Contato> save(@RequestBody Contato contato){
-		Contato newContato = contatoService.save(contato);
+	public ResponseEntity<Contato>saveByIdContato(@PathVariable Long id, @RequestBody Contato contato){
 		
+		Contato newContato = contatoService.save(id, contato);
+				
 		if(newContato == null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(newContato);
 	}
-	*/
+	
 	
 	
 }

@@ -7,11 +7,10 @@ import br.com.gianlucca.AvaliacaoSpring.model.Contato;
 import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
 
 public interface ContatoServiceinterface {
-	Contato save(Contato contato);
+	/*Contato save(Contato contato);*/
+	Contato save(Long pessoaId, Contato contato);
 	Optional<Contato> getById(Long id);
 	List<Contato> getAll(Contato Contato);
-	Contato update(Contato contato);
+	Contato update(Long id, Contato contato);
 	void delete(Long id);
-	Contato adicionarContato(Long id, int contato);
-	Contato removerContato(Long id, int contato);
 }

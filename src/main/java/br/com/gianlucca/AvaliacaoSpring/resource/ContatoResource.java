@@ -36,17 +36,18 @@ public class ContatoResource {
 		}
 		return ResponseEntity.ok(contato);
 	}
-		
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Contato> update(@RequestBody Contato contato,@PathVariable Long id ){
-		return new ResponseEntity<>(contatoService.update(contato), HttpStatus.CREATED);
+	public ResponseEntity<Contato> update(@RequestBody Contato contato,@PathVariable Long id){
+		
+		return new ResponseEntity<>(contatoService.update(id, contato), HttpStatus.CREATED);
 	}
-	
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		contatoService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	
+	
 }

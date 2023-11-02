@@ -7,19 +7,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.gianlucca.AvaliacaoSpring.model.Contato;
+import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
 import br.com.gianlucca.AvaliacaoSpring.repository.ContatoRepository;
+import br.com.gianlucca.AvaliacaoSpring.repository.PessoaRepository;
 
 @Service
 public class ContatoService {
 	private ContatoRepository contatoRepository;
+	private PessoaRepository pessoaRepository;
 	
 	@Autowired
-	public ContatoService(ContatoRepository contatoRepository) {
+	public ContatoService(ContatoRepository contatoRepository, PessoaRepository pessoaRepository) {
 		this.contatoRepository = contatoRepository;
+		this.pessoaRepository = pessoaRepository;
 	}
 	
-	public Contato save(Contato contato) {
-		return contatoRepository.save(contato);
+	public Contato save(Long pessoaId, Contato contato) {
+		Optional<Pessoa> getPessoa = pessoaRepository.findById(pessoaId);
+		
+		if(getPessoa.isPresent()) {
+			Pessoa pessoa = getPessoa.get();
+			contato.setPessoa(pessoa);
+			return contatoRepository.save(contato);
+		}
+		return contato;
 	}
 	public Optional<Contato> getById(Long id) {
 		return contatoRepository.findById(id);
@@ -29,8 +40,8 @@ public class ContatoService {
 		return contatoRepository.findAll();
 	}
 	
-	public Contato update(Contato contato) {
-		Optional<Contato> attContato = contatoRepository.findById(contato.getId());
+	public Contato update(Long id, Contato contato) {
+		Optional<Contato> attContato = contatoRepository.findById(id);
 		
 		if(attContato.isPresent()) {
 			Contato newContato = attContato.get();
