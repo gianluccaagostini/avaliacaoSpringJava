@@ -18,8 +18,8 @@ public class OpenApiConfig {
 				.components(new Components().addSecuritySchemes("basicScheme",
 						new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")))
 				.info(new Info()
-						.title("App Cadastro de produtos")
-						.description("Este aplicativo faz controle de cadastro de produtos")
+						.title("App Cadastrod e pessoas e contatos")
+						.description("Este aplicativo faz parte da Avaliação Java Spring - Minsait 10/2023")
 						.contact(new Contact().name("Gianlucca Agostini").email("gianluccaagostini97@gmail.com").url("https://github.com/gianluccaagostini/avaliacaoSpringJava"))
 						.version("Versão 0.0.1-SNAPSHOT"));
 	}	

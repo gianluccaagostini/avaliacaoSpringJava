@@ -20,7 +20,6 @@ public class PessoaService implements PessoaServiceInterface {
 	public PessoaService(PessoaRepository pessoaRepository) {
 		this.pessoaRepository = pessoaRepository;
 	}
-	//Implementado agr
 	@Override
 	public Optional<PessoaDTORecord> getMalaDireta(Long id) {
 		Pessoa pessoa = pessoaRepository.findById(id).get();
