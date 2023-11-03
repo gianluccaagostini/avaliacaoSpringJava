@@ -36,8 +36,15 @@ public class ContatoService {
 		return contatoRepository.findById(id);
 	}
 	
-	public List<Contato> getAll(){
-		return contatoRepository.findAll();
+	public Optional<List<Contato>>getAll(Long pessoaId){
+		
+		Optional<Pessoa> getPessoa = pessoaRepository.findById(pessoaId);
+		
+		if(getPessoa.isPresent()) {
+			Pessoa pessoa = getPessoa.get();
+			return contatoRepository.findAllByPessoa(pessoa);
+		}
+		return null;
 	}
 	
 	public Contato update(Long id, Contato contato) {

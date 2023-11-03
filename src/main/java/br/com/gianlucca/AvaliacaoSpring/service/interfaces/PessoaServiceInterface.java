@@ -3,6 +3,7 @@ package br.com.gianlucca.AvaliacaoSpring.service.interfaces;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.gianlucca.AvaliacaoSpring.dto.PessoaDTORecord;
 import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
 
 public interface PessoaServiceInterface {
@@ -11,4 +12,5 @@ public interface PessoaServiceInterface {
 	List<Pessoa> getAll();
 	Pessoa update(Long id, Pessoa pessoa);
 	void delete(Long id);
+	Optional<PessoaDTORecord> getMalaDireta(Long id);
 }

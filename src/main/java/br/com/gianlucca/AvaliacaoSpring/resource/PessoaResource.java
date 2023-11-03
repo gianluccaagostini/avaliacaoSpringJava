@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.gianlucca.AvaliacaoSpring.dto.PessoaDTO;
+import br.com.gianlucca.AvaliacaoSpring.dto.PessoaDTORecord;
 import br.com.gianlucca.AvaliacaoSpring.model.Contato;
 import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
 import br.com.gianlucca.AvaliacaoSpring.service.ContatoService;
@@ -28,6 +31,10 @@ public class PessoaResource {
 	public PessoaResource(PessoaService pessoaService, ContatoService contatoService) {
 		this.pessoaService = pessoaService;
 		this.contatoService = contatoService;
+	}
+	@GetMapping("/maladireta/{id}")
+	public Optional<PessoaDTORecord> getMalaDireta(@PathVariable Long id) {
+		return pessoaService.getMalaDireta(id);
 	}
 	
 	@GetMapping//ok
@@ -84,6 +91,14 @@ public class PessoaResource {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(newContato);
+	}
+	@GetMapping("/{idPessoa}/contatos")
+	public ResponseEntity<Optional<List<Contato>>> findAll(@PathVariable Long idPessoa){
+		Optional<List<Contato>> contatos = contatoService.getAll(idPessoa);
+		if(contatos ==null ) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(contatos);
 	}
 	
 	

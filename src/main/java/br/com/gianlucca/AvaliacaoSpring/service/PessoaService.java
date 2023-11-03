@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.gianlucca.AvaliacaoSpring.dto.PessoaDTO;
+import br.com.gianlucca.AvaliacaoSpring.dto.PessoaDTORecord;
 import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
 import br.com.gianlucca.AvaliacaoSpring.repository.PessoaRepository;
 import br.com.gianlucca.AvaliacaoSpring.service.interfaces.PessoaServiceInterface;
@@ -18,6 +20,15 @@ public class PessoaService implements PessoaServiceInterface {
 	@Autowired
 	public PessoaService(PessoaRepository pessoaRepository) {
 		this.pessoaRepository = pessoaRepository;
+	}
+	//Implementado agr
+	@Override
+	public Optional<PessoaDTORecord> getMalaDireta(Long id) {
+		Pessoa pessoa = pessoaRepository.findById(id).get();
+		String malaDireta = pessoa.getEndereco() + " - " + pessoa.getCep() + " - " + pessoa.getCidade() + "/" + pessoa.getUf();
+		PessoaDTORecord dto = new PessoaDTORecord(pessoa.getId(),pessoa.getNome(), malaDireta);
+		
+		return Optional.of(dto);
 	}
 	
 	@Override
