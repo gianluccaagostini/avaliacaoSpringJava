@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.gianlucca.AvaliacaoSpring.dto.PessoaDTO;
 import br.com.gianlucca.AvaliacaoSpring.dto.PessoaDTORecord;
 import br.com.gianlucca.AvaliacaoSpring.model.Contato;
 import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
