@@ -28,25 +28,25 @@ public class ContatoResource {
 	public ContatoResource(ContatoService contatoService) {
 		this.contatoService = contatoService;
 	}
-	/*-------------------------------------------------------------------Endpoints de pessoas------------------------------------------------------------------------------*/
-	@Operation(summary = "Busca o contato pelo Id do contato")
-	@GetMapping("/{id}")//validado
+	/*-------------------------------------------------------------------Endpoints de contatos------------------------------------------------------------------------------*/
+	@Operation(summary = "Retorna o contato pelo ID")
+	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Contato>> getById(@PathVariable Long id){
-		Optional<Contato> contato = contatoService.getById(id);
-		if(contato == null) {
+		Optional<Contato> contatoporId = contatoService.getById(id);
+		if(contatoporId == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(contato);
+		return ResponseEntity.ok(contatoporId);
 	}
 	
-	@Operation(summary = "Atualiza o contato pelo id do contato")
-	@PutMapping("/{id}")//validado
+	@Operation(summary = "Atualiza o contato pelo iD")
+	@PutMapping("/{id}")
 	public ResponseEntity<Contato> update(@RequestBody Contato contato,@PathVariable Long id){
 		
 		return new ResponseEntity<>(contatoService.update(id, contato), HttpStatus.CREATED);
 	}
 	
-	@Operation(summary = "Deleta o contato pelo id do contato")
+	@Operation(summary = "Deleta o contato pelo ID")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		contatoService.delete(id);

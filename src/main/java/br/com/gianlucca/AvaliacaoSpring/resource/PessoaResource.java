@@ -36,12 +36,12 @@ public class PessoaResource {
 	@Operation(summary = "Cria uma nova pessoa na tabela")
 	@PostMapping 
 	public ResponseEntity<Pessoa> save(@RequestBody Pessoa pessoa) {
-		Pessoa newPessoa = pessoaService.save(pessoa);
+		Pessoa pessoaNova = pessoaService.save(pessoa);
 		
-		if(newPessoa == null) {
+		if(pessoaNova == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(newPessoa);
+		return ResponseEntity.ok(pessoaNova);
 	}
 	
 	
@@ -65,22 +65,22 @@ public class PessoaResource {
 	@Operation(summary = "Lista todas as pessoas cadastradas na tabela tb_pessoas")
 	@GetMapping
 	public ResponseEntity<List<Pessoa>> getAllPessoas(){
-		List<Pessoa> pessoas = pessoaService.getAll();
-		if(pessoas == null) {
+		List<Pessoa> listaPessoas = pessoaService.getAll();
+		if(listaPessoas == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(pessoas);
+		return ResponseEntity.ok(listaPessoas);
 	}
 	
 	@Operation(summary = "Atualiza a pessoa pelo id")
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> update(@RequestBody Pessoa pessoa, @PathVariable Long id) {
-		ResponseEntity<Object> newPessoa = pessoaService.update(id, pessoa);
+		ResponseEntity<Object> pessoaNova = pessoaService.update(id, pessoa);
 		
-		if(newPessoa == null) {
+		if(pessoaNova == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(newPessoa);
+		return ResponseEntity.ok(pessoaNova);
 	}
 	
 	@Operation(summary = "Deleta a pessoa pelo id")
@@ -97,22 +97,22 @@ public class PessoaResource {
 	@Operation(summary = "Salva um novo contato pelo ID da pessoa")
 	@PostMapping("/{id}/contatos")
 	public ResponseEntity<Contato>saveByIdContato(@PathVariable Long id, @RequestBody Contato contato){
-		Contato newContato = this.contatoService.save(id, contato);
+		Contato contatoNovo = this.contatoService.save(id, contato);
 				
-		if(newContato == null) {
+		if(contatoNovo == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(newContato);
+		return ResponseEntity.ok(contatoNovo);
 	}
 	
 	@Operation(summary = "Retorna todos os contatos atribuidos à uma pessoa")
 	@GetMapping("/{idPessoa}/contatos")
 	public ResponseEntity<Optional<List<Contato>>> findAll(@PathVariable Long idPessoa){
-		Optional<List<Contato>> contatos = contatoService.getAll(idPessoa);
-		if(contatos ==null ) {
+		Optional<List<Contato>> listaContatos = contatoService.getAll(idPessoa);
+		if(listaContatos ==null ) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(contatos);
+		return ResponseEntity.ok(listaContatos);
 	}
 	
 	
