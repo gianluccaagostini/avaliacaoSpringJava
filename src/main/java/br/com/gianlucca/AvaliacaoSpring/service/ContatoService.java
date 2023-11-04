@@ -27,7 +27,7 @@ public class ContatoService implements ContatoServiceinterface {
 		Optional<Pessoa> contatoPorPessoaId = this.pessoaRepository.findById(pessoaId);
 		
 		
-		if(contatoPorPessoaId.isPresent() && contato.getTipoContato()==0 || contato.getTipoContato()==1) {
+		if(contatoPorPessoaId.isPresent() && contato.getTipoContato()== 0 || contato.getTipoContato()== 1) {
 			Pessoa pessoaporIdBuscado = contatoPorPessoaId.get();
 			contato.setPessoa(pessoaporIdBuscado);
 			return contatoRepository.save(contato);

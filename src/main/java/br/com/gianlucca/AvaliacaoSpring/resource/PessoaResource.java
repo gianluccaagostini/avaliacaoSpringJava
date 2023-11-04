@@ -90,6 +90,7 @@ public class PessoaResource {
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		pessoaService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		
 	}
 	
 	
