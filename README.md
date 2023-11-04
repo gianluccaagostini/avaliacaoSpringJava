@@ -7,6 +7,7 @@ Essa aplicação é um CRUD de pessoas e contatos, feita para o processo de Jove
 - Apache Maven - Versão 3.9.5
 - MySQL - Versão 8.1.0
 - Swagger - Versão 2.2.0
+- Spring Boot - Versão 3.0.12
 
 # Ambiente 
 - Eclipse IDE
