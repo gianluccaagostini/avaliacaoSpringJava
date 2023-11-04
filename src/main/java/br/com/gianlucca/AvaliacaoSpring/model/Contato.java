@@ -2,6 +2,9 @@ package br.com.gianlucca.AvaliacaoSpring.model;
 
 import java.util.Objects;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +14,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="tb_contato")
@@ -25,10 +31,12 @@ public class Contato {
 	private int tipoContato;
 	
 	@Column(nullable = false, length=200)
+	@NotEmpty
 	private String contato;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name= "pessoa_id", referencedColumnName = "id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Pessoa pessoa;
 	
 	public Contato() {}

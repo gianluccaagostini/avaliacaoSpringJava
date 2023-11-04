@@ -28,7 +28,7 @@ public class ContatoResource {
 		this.contatoService = contatoService;
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{id}")//validado
 	public ResponseEntity<Optional<Contato>> getById(@PathVariable Long id){
 		Optional<Contato> contato = contatoService.getById(id);
 		if(contato == null) {
@@ -37,7 +37,7 @@ public class ContatoResource {
 		return ResponseEntity.ok(contato);
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/{id}")//validado
 	public ResponseEntity<Contato> update(@RequestBody Contato contato,@PathVariable Long id){
 		
 		return new ResponseEntity<>(contatoService.update(id, contato), HttpStatus.CREATED);

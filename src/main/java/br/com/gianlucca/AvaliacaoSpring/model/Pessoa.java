@@ -2,12 +2,17 @@ package br.com.gianlucca.AvaliacaoSpring.model;
 
 import java.util.Objects;
 
+import org.springframework.http.HttpStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="tb_pessoas")
@@ -18,11 +23,12 @@ public class Pessoa {
 	private Long id;
 	
 	@Column(nullable = false, length = 100)
+	@NotEmpty
 	private String nome;
 	
 	@Column(length=200)
 	private String endereco;
-	
+
 	@Column(length=8)
 	private String cep;
 	
@@ -107,6 +113,7 @@ public class Pessoa {
 		Pessoa other = (Pessoa) obj;
 		return Objects.equals(id, other.id);
 	}
+
 	
 	
 	

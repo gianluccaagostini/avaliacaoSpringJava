@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.gianlucca.AvaliacaoSpring.dto.PessoaDTORecord;
@@ -42,7 +44,7 @@ public class PessoaService implements PessoaServiceInterface {
 		return pessoaRepository.findAll();
 	}
 	@Override
-	public Pessoa update(Long id,Pessoa pessoa) {
+	public ResponseEntity<Object> update(Long id,Pessoa pessoa) {
 		Optional<Pessoa> attPessoa = pessoaRepository.findById(id);
 		
 		if(attPessoa.isPresent()) {
@@ -52,13 +54,14 @@ public class PessoaService implements PessoaServiceInterface {
 		newPessoa.setCep(pessoa.getCep());
 		newPessoa.setCidade(pessoa.getCidade());
 		newPessoa.setUf(pessoa.getUf());
-		return pessoaRepository.save(newPessoa);
+		return ResponseEntity.ok(newPessoa);
+		//return pessoaRepository.save(newPessoa);
 		}
-		return pessoa;
+		return ResponseEntity.notFound().build();
 	}
 	@Override
 	public void delete(Long id) {
-		pessoaRepository.deleteById(id);
+		 pessoaRepository.deleteById(id);
 	}
 	
 	

@@ -31,31 +31,8 @@ public class PessoaResource {
 		this.pessoaService = pessoaService;
 		this.contatoService = contatoService;
 	}
-	@GetMapping("/maladireta/{id}")
-	public Optional<PessoaDTORecord> getMalaDireta(@PathVariable Long id) {
-		return pessoaService.getMalaDireta(id);
-	}
 	
-	@GetMapping//ok
-	public ResponseEntity<List<Pessoa>> getAllPessoas(){
-		List<Pessoa> pessoas = pessoaService.getAll();
-		if(pessoas == null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(pessoas);
-	}
-	
-	@GetMapping("/{id}")//ok
-	public ResponseEntity<Optional<Pessoa>> getById(@PathVariable Long id){
-		Optional<Pessoa> pessoa = pessoaService.getById(id);
-		if(pessoa == null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(pessoa);
-		
-	}
-	
-	@PostMapping//ok
+	@PostMapping //validado
 	public ResponseEntity<Pessoa> save(@RequestBody Pessoa pessoa) {
 		Pessoa newPessoa = pessoaService.save(pessoa);
 		
@@ -65,9 +42,33 @@ public class PessoaResource {
 		return ResponseEntity.ok(newPessoa);
 	}
 	
-	@PutMapping("/{id}")//verificar
-	public ResponseEntity<Pessoa> update(@RequestBody Pessoa pessoa, @PathVariable Long id) {
-		Pessoa newPessoa = pessoaService.update(id, pessoa);
+	@GetMapping("/{id}") //validado
+	public ResponseEntity<Optional<Pessoa>> getById(@PathVariable Long id){
+		Optional<Pessoa> pessoa = pessoaService.getById(id);
+		if(pessoa == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(pessoa);
+		
+	}
+	
+	@GetMapping("/maladireta/{id}") //validado
+	public Optional<PessoaDTORecord> getMalaDireta(@PathVariable Long id) {
+		return pessoaService.getMalaDireta(id);
+	}
+	
+	@GetMapping//validado
+	public ResponseEntity<List<Pessoa>> getAllPessoas(){
+		List<Pessoa> pessoas = pessoaService.getAll();
+		if(pessoas == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(pessoas);
+	}
+		
+	@PutMapping("/{id}")//validar update de id não existente
+	public ResponseEntity<Object> update(@RequestBody Pessoa pessoa, @PathVariable Long id) {
+		ResponseEntity<Object> newPessoa = pessoaService.update(id, pessoa);
 		
 		if(newPessoa == null) {
 			return ResponseEntity.notFound().build();
@@ -75,13 +76,18 @@ public class PessoaResource {
 		return ResponseEntity.ok(newPessoa);
 	}
 	
-	@DeleteMapping("/{id}")//ok
+	
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		pessoaService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
-	@PostMapping("/{id}/contatos")
+	
+	
+	//Endpoints de Pessoa relacionado a contatos
+	
+	@PostMapping("/{id}/contatos")//validado
 	public ResponseEntity<Contato>saveByIdContato(@PathVariable Long id, @RequestBody Contato contato){
 		
 		Contato newContato = contatoService.save(id, contato);
@@ -92,7 +98,7 @@ public class PessoaResource {
 		return ResponseEntity.ok(newContato);
 	}
 	
-	@GetMapping("/{idPessoa}/contatos")
+	@GetMapping("/{idPessoa}/contatos")//validado
 	public ResponseEntity<Optional<List<Contato>>> findAll(@PathVariable Long idPessoa){
 		Optional<List<Contato>> contatos = contatoService.getAll(idPessoa);
 		if(contatos ==null ) {
