@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "cf0cac3b-b7c3-46cc-8651-50a29fc7d7a7",
+		"name": "API - Pessoas e Contatos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30516204"
+	},
+	"item": [
+		{
+			"name": "Requisições Pessoas",
+			"item": [
+				{
+					"name": "Cadastrar pessoa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste\",\r\n    \"endereco\": \"Rua Teste\",\r\n    \"cep\": \"01234567\",\r\n    \"cidade\": \"Sao Paulo\",\r\n    \"uf\": \"SP\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/pessoas"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar pessoa por ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/pessoas/8"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar pessoa por Mala Direta",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/pessoas/maladireta/8"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar pessoas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/pessoas"
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar pessoa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste Update\",\r\n    \"endereco\": \"Rua Teste\",\r\n    \"cep\": \"01234567\",\r\n    \"cidade\": \"Sao Paulo\",\r\n    \"uf\": \"SP\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/pessoas/8"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar pessoa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/pessoas/8"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requisições Contato",
+			"item": [
+				{
+					"name": "Adiciona contato por idContato",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"contato\": \"332211\",\r\n        \"tipoContato\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/pessoas/8/contatos"
+					},
+					"response": []
+				},
+				{
+					"name": "Lista contato por idContato",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/contatos/8"
+					},
+					"response": []
+				},
+				{
+					"name": "Lista contato por idPessoa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/pessoas/8/contatos"
+					},
+					"response": []
+				},
+				{
+					"name": "Altera contato por idContato",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"contato\": \"556677\",\r\n        \"tipo_contato\": 0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/contatos/8"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar contato por idContato",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/contatos/9"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
