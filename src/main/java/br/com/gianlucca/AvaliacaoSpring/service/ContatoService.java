@@ -53,7 +53,6 @@ public class ContatoService {
 		if(attContato.isPresent()) {
 			Contato newContato = attContato.get();
 			newContato.setContato(contato.getContato());
-			newContato.setContato(contato.getContato());
 			newContato.setTipoContato(contato.getTipoContato());
 			return contatoRepository.save(newContato);
 		}

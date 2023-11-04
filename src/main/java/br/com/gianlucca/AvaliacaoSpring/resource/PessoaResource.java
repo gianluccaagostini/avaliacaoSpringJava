@@ -39,7 +39,7 @@ public class PessoaResource {
 	@GetMapping//ok
 	public ResponseEntity<List<Pessoa>> getAllPessoas(){
 		List<Pessoa> pessoas = pessoaService.getAll();
-		if(pessoas ==null) {
+		if(pessoas == null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(pessoas);
@@ -91,6 +91,7 @@ public class PessoaResource {
 		}
 		return ResponseEntity.ok(newContato);
 	}
+	
 	@GetMapping("/{idPessoa}/contatos")
 	public ResponseEntity<Optional<List<Contato>>> findAll(@PathVariable Long idPessoa){
 		Optional<List<Contato>> contatos = contatoService.getAll(idPessoa);
