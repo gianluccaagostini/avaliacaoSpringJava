@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.gianlucca.AvaliacaoSpring.dto.PessoaDTORecord;
@@ -43,7 +42,7 @@ public class PessoaService implements PessoaServiceInterface {
 		return pessoaRepository.findAll();
 	}
 	@Override
-	public ResponseEntity<Object> update(Long id,Pessoa pessoa) {
+	public Pessoa update(Long id,Pessoa pessoa) {
 		Optional<Pessoa> updatePessoa = pessoaRepository.findById(id);
 		
 		if(updatePessoa.isPresent()) {
@@ -53,10 +52,10 @@ public class PessoaService implements PessoaServiceInterface {
 		pessoaNova.setCep(pessoa.getCep());
 		pessoaNova.setCidade(pessoa.getCidade());
 		pessoaNova.setUf(pessoa.getUf());
-		return ResponseEntity.ok(pessoaNova);
-		//return pessoaRepository.save(newPessoa);
+		return pessoaRepository.save(pessoaNova);
+		
 		}
-		return ResponseEntity.notFound().build();
+		return null;
 	}
 	@Override
 	public void delete(Long id) {

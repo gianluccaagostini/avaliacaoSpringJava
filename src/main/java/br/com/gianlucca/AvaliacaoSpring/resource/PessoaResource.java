@@ -74,12 +74,13 @@ public class PessoaResource {
 	
 	@Operation(summary = "Atualiza a pessoa pelo id")
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> update(@RequestBody Pessoa pessoa, @PathVariable Long id) {
-		ResponseEntity<Object> pessoaNova = pessoaService.update(id, pessoa);
+	public ResponseEntity<Pessoa> update(@RequestBody Pessoa pessoa, @PathVariable Long id) {
+		Pessoa pessoaNova = pessoaService.update(id, pessoa);
 		
 		if(pessoaNova == null) {
 			return ResponseEntity.notFound().build();
 		}
+		
 		return ResponseEntity.ok(pessoaNova);
 	}
 	
