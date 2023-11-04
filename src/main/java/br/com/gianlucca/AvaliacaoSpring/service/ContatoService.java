@@ -10,9 +10,10 @@ import br.com.gianlucca.AvaliacaoSpring.model.Contato;
 import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
 import br.com.gianlucca.AvaliacaoSpring.repository.ContatoRepository;
 import br.com.gianlucca.AvaliacaoSpring.repository.PessoaRepository;
+import br.com.gianlucca.AvaliacaoSpring.service.interfaces.ContatoServiceinterface;
 
 @Service
-public class ContatoService {
+public class ContatoService implements ContatoServiceinterface {
 	private ContatoRepository contatoRepository;
 	private PessoaRepository pessoaRepository;
 	
@@ -23,11 +24,12 @@ public class ContatoService {
 	}
 	
 	public Contato save(Long pessoaId, Contato contato) {
-		Optional<Pessoa> getPessoa = pessoaRepository.findById(pessoaId);
+		Optional<Pessoa> contatoPorPessoaId = this.pessoaRepository.findById(pessoaId);
 		
-		if(getPessoa.isPresent()) {
-			Pessoa pessoa = getPessoa.get();
-			contato.setPessoa(pessoa);
+		
+		if(contatoPorPessoaId.isPresent()) {
+			Pessoa pessoaporIdBuscado = contatoPorPessoaId.get();
+			contato.setPessoa(pessoaporIdBuscado);
 			return contatoRepository.save(contato);
 		}
 		return contato;
@@ -38,23 +40,23 @@ public class ContatoService {
 	
 	public Optional<List<Contato>>getAll(Long pessoaId){
 		
-		Optional<Pessoa> getPessoa = pessoaRepository.findById(pessoaId);
+		Optional<Pessoa> listaPessoaId = pessoaRepository.findById(pessoaId);
 		
-		if(getPessoa.isPresent()) {
-			Pessoa pessoa = getPessoa.get();
+		if(listaPessoaId.isPresent()) {
+			Pessoa pessoa = listaPessoaId.get();
 			return contatoRepository.findAllByPessoa(pessoa);
 		}
 		return null;
 	}
 	
 	public Contato update(Long id, Contato contato) {
-		Optional<Contato> attContato = contatoRepository.findById(id);
+		Optional<Contato> updateContato = contatoRepository.findById(id);
 		
-		if(attContato.isPresent()) {
-			Contato newContato = attContato.get();
-			newContato.setContato(contato.getContato());
-			newContato.setTipoContato(contato.getTipoContato());
-			return contatoRepository.save(newContato);
+		if(updateContato.isPresent()) {
+			Contato contatoNovo = updateContato.get();
+			contatoNovo.setContato(contato.getContato());
+			contatoNovo.setTipoContato(contato.getTipoContato());
+			return contatoRepository.save(contatoNovo);
 		}
 		return contato;
 	}

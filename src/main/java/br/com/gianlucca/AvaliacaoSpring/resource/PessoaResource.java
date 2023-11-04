@@ -19,6 +19,7 @@ import br.com.gianlucca.AvaliacaoSpring.model.Contato;
 import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
 import br.com.gianlucca.AvaliacaoSpring.service.ContatoService;
 import br.com.gianlucca.AvaliacaoSpring.service.PessoaService;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/pessoas")
@@ -31,8 +32,9 @@ public class PessoaResource {
 		this.pessoaService = pessoaService;
 		this.contatoService = contatoService;
 	}
-	
-	@PostMapping //validado
+	/*----------------------------------------------------Endpoints de Pessoa-----------------------------------------------------------------------------------------*/
+	@Operation(summary = "Cria uma nova pessoa na tabela")
+	@PostMapping 
 	public ResponseEntity<Pessoa> save(@RequestBody Pessoa pessoa) {
 		Pessoa newPessoa = pessoaService.save(pessoa);
 		
@@ -42,22 +44,26 @@ public class PessoaResource {
 		return ResponseEntity.ok(newPessoa);
 	}
 	
-	@GetMapping("/{id}") //validado
+	
+	@Operation(summary = "Busca e retorna uma pessoa pelo seu ID")
+	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Pessoa>> getById(@PathVariable Long id){
-		Optional<Pessoa> pessoa = pessoaService.getById(id);
-		if(pessoa == null) {
+		Optional<Pessoa> pessoapeloId = pessoaService.getById(id);
+		if(pessoapeloId == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(pessoa);
+		return ResponseEntity.ok(pessoapeloId);
 		
 	}
 	
-	@GetMapping("/maladireta/{id}") //validado
-	public Optional<PessoaDTORecord> getMalaDireta(@PathVariable Long id) {
+	@Operation(summary = "Busca uma pessoa pelo ID e retorna uma string concatenando o endereço, utilizando um DTO/Record")
+	@GetMapping("/maladireta/{id}")
+	public Optional<PessoaDTORecord> buscarMalaDireta(@PathVariable Long id) {
 		return pessoaService.getMalaDireta(id);
 	}
 	
-	@GetMapping//validado
+	@Operation(summary = "Lista todas as pessoas cadastradas na tabela tb_pessoas")
+	@GetMapping
 	public ResponseEntity<List<Pessoa>> getAllPessoas(){
 		List<Pessoa> pessoas = pessoaService.getAll();
 		if(pessoas == null) {
@@ -65,8 +71,9 @@ public class PessoaResource {
 		}
 		return ResponseEntity.ok(pessoas);
 	}
-		
-	@PutMapping("/{id}")//validar update de id não existente
+	
+	@Operation(summary = "Atualiza a pessoa pelo id")
+	@PutMapping("/{id}")
 	public ResponseEntity<Object> update(@RequestBody Pessoa pessoa, @PathVariable Long id) {
 		ResponseEntity<Object> newPessoa = pessoaService.update(id, pessoa);
 		
@@ -76,7 +83,7 @@ public class PessoaResource {
 		return ResponseEntity.ok(newPessoa);
 	}
 	
-	
+	@Operation(summary = "Deleta a pessoa pelo id")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		pessoaService.delete(id);
@@ -85,12 +92,12 @@ public class PessoaResource {
 	
 	
 	
-	//Endpoints de Pessoa relacionado a contatos
+	/*----------------------------------------------------Endpoints de Pessoa relacionados com contato-----------------------------------------------------------------------------------------*/
 	
-	@PostMapping("/{id}/contatos")//validado
+	@Operation(summary = "Salva um novo contato pelo ID da pessoa")
+	@PostMapping("/{id}/contatos")
 	public ResponseEntity<Contato>saveByIdContato(@PathVariable Long id, @RequestBody Contato contato){
-		
-		Contato newContato = contatoService.save(id, contato);
+		Contato newContato = this.contatoService.save(id, contato);
 				
 		if(newContato == null) {
 			return ResponseEntity.notFound().build();
@@ -98,7 +105,8 @@ public class PessoaResource {
 		return ResponseEntity.ok(newContato);
 	}
 	
-	@GetMapping("/{idPessoa}/contatos")//validado
+	@Operation(summary = "Retorna todos os contatos atribuidos à uma pessoa")
+	@GetMapping("/{idPessoa}/contatos")
 	public ResponseEntity<Optional<List<Contato>>> findAll(@PathVariable Long idPessoa){
 		Optional<List<Contato>> contatos = contatoService.getAll(idPessoa);
 		if(contatos ==null ) {

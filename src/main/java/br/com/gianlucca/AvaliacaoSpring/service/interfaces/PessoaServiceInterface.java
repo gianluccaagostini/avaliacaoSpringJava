@@ -6,15 +6,14 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 
 import br.com.gianlucca.AvaliacaoSpring.dto.PessoaDTORecord;
-import br.com.gianlucca.AvaliacaoSpring.model.Contato;
 import br.com.gianlucca.AvaliacaoSpring.model.Pessoa;
 
 public interface PessoaServiceInterface {
 	Pessoa save(Pessoa pessoa);
 	Optional<Pessoa> getById(Long id);
 	List<Pessoa> getAll();
-	ResponseEntity<Object> update(Long id, Pessoa pessoa);//implementado o responseEntity
+	ResponseEntity<Object> update(Long id, Pessoa pessoa);
 	void delete(Long id);
 	Optional<PessoaDTORecord> getMalaDireta(Long id);
-	//Optional<List<Contato>> findAllByPessoa(Pessoa pessoa);
+
 }

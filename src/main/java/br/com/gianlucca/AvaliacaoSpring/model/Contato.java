@@ -5,21 +5,20 @@ import java.util.Objects;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="tb_contato")
+@Table(name="tb_contatos")
 public class Contato {
 
 	@Id
@@ -27,7 +26,7 @@ public class Contato {
 	@Column(nullable = false, unique = true)
 	private Long id;
 	
-	@Column(nullable = false, length=1)
+	@Column(length=1)
 	private int tipoContato;
 	
 	@Column(nullable = false, length=200)

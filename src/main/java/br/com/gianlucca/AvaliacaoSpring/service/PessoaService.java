@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +23,11 @@ public class PessoaService implements PessoaServiceInterface {
 	}
 	@Override
 	public Optional<PessoaDTORecord> getMalaDireta(Long id) {
-		Pessoa pessoa = pessoaRepository.findById(id).get();
-		String malaDireta = pessoa.getEndereco() + " - " + pessoa.getCep() + " - " + pessoa.getCidade() + "/" + pessoa.getUf();
-		PessoaDTORecord dto = new PessoaDTORecord(pessoa.getId(),pessoa.getNome(), malaDireta);
+		Pessoa pessoaPorId = pessoaRepository.findById(id).get();
+		String malaDireta = "Rua: " + pessoaPorId.getEndereco() + " - CEP: " + pessoaPorId.getCep() + " - Cidade/UF: " + pessoaPorId.getCidade() + "/" + pessoaPorId.getUf();
+		PessoaDTORecord pessoaDto = new PessoaDTORecord(pessoaPorId.getId(),pessoaPorId.getNome(), malaDireta);
 		
-		return Optional.of(dto);
+		return Optional.of(pessoaDto);
 	}
 	
 	@Override
@@ -45,16 +44,16 @@ public class PessoaService implements PessoaServiceInterface {
 	}
 	@Override
 	public ResponseEntity<Object> update(Long id,Pessoa pessoa) {
-		Optional<Pessoa> attPessoa = pessoaRepository.findById(id);
+		Optional<Pessoa> updatePessoa = pessoaRepository.findById(id);
 		
-		if(attPessoa.isPresent()) {
-		Pessoa newPessoa = attPessoa.get();
-		newPessoa.setNome(pessoa.getNome());
-		newPessoa.setEndereco(pessoa.getEndereco());
-		newPessoa.setCep(pessoa.getCep());
-		newPessoa.setCidade(pessoa.getCidade());
-		newPessoa.setUf(pessoa.getUf());
-		return ResponseEntity.ok(newPessoa);
+		if(updatePessoa.isPresent()) {
+		Pessoa pessoaNova = updatePessoa.get();
+		pessoaNova.setNome(pessoa.getNome());
+		pessoaNova.setEndereco(pessoa.getEndereco());
+		pessoaNova.setCep(pessoa.getCep());
+		pessoaNova.setCidade(pessoa.getCidade());
+		pessoaNova.setUf(pessoa.getUf());
+		return ResponseEntity.ok(pessoaNova);
 		//return pessoaRepository.save(newPessoa);
 		}
 		return ResponseEntity.notFound().build();
