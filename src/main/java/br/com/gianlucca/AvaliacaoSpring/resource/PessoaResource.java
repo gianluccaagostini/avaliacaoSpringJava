@@ -84,6 +84,7 @@ public class PessoaResource {
 		return ResponseEntity.ok(pessoaNova);
 	}
 	
+	
 	@Operation(summary = "Deleta a pessoa pelo id")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id){
